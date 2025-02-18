@@ -1,7 +1,7 @@
 import { currentLocale, Locale } from './config'
 
 const dictionaries = {
-  ja: () => import('./en.json').then((module) => module.default),
+  en: () => import('./en.json').then((module) => module.default),
 }
 
-export const getDictionary = async (locale: Locale = currentLocale) => dictionaries[locale]?.() ?? dictionaries.ja()
+export const getDictionary = async (locale: Locale = currentLocale) => dictionaries[locale]?.() ?? dictionaries.en()
