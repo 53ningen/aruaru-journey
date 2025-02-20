@@ -1,11 +1,13 @@
+import { listIssueTags } from '@/actions/issueTag'
 import { Tag } from '@prisma/client'
 import { IssueTagItem } from './IssueTagItem'
 
 type Props = {
-  tags: Tag[]
+  issueId: number
 }
 
-export const IssueTagList = ({ tags }: Props) => {
+export const IssueTagList = async ({ issueId }: Props) => {
+  const tags: Tag[] = await listIssueTags(issueId)
   const parents: Tag[] = []
   tags.forEach((tag) => {
     if (tag.parentId) {
@@ -18,7 +20,7 @@ export const IssueTagList = ({ tags }: Props) => {
   return (
     <div>
       {tags.map((tag) => (
-        <IssueTagItem key={tag.id} tag={tag} />
+        <IssueTagItem key={tag.id} issueId={issueId} tag={tag} />
       ))}
     </div>
   )

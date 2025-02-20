@@ -1,3 +1,5 @@
+'use server'
+
 import { CacheTags } from '@/lib/cache'
 import prisma from '@/lib/prisma'
 import { unstable_cache } from 'next/cache'
@@ -7,11 +9,6 @@ export const getIssue = unstable_cache(
     prisma.issue.findUnique({
       include: {
         category: true,
-        issueTags: {
-          include: {
-            tag: true,
-          },
-        },
       },
       where: {
         id,

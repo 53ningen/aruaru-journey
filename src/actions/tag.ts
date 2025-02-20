@@ -14,7 +14,7 @@ export const getTag = unstable_cache(
 )
 
 export const listTags = unstable_cache(
-  async (categoryId: number, parentId: number | null) =>
+  async (categoryId: number, parentId: number | null = null) =>
     prisma.tag.findMany({
       where: {
         categoryId,
@@ -26,4 +26,18 @@ export const listTags = unstable_cache(
     }),
   undefined,
   { tags: [CacheTags.Tag] }
+)
+
+export const listAllTags = unstable_cache(
+  async (categoryId: number) =>
+    prisma.tag.findMany({
+      where: { categoryId },
+      orderBy: {
+        displayOrder: 'asc',
+      },
+    }),
+  undefined,
+  {
+    tags: [CacheTags.Tag],
+  }
 )

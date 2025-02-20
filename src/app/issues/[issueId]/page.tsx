@@ -4,6 +4,7 @@ import Container from '@/components/common/Container'
 import getMetadata from '@/components/common/Meta'
 import SectionHeading from '@/components/common/SectionHeading'
 import Title from '@/components/common/Title'
+import { CategoryIssueTagEditor } from '@/components/issue/CategoryIssueTagEditor'
 import { IssueTagList } from '@/components/issue/IssueTagList'
 import { getDictionary } from '@/i18n/dictionaries'
 import { Metadata } from 'next'
@@ -67,13 +68,14 @@ const IssuePages = async ({ params }: Props) => {
         <div>{issue.note || <span className="text-gray-500">{t.noCaseNote}</span>}</div>
         <div>
           <SectionHeading title="🏷️ Tags" />
-          {issue.issueTags.length > 0 ? (
+          <div className="flex flex-col gap-4">
             <Suspense fallback={<div>Loading...</div>}>
-              <IssueTagList tags={issue.issueTags.map((it) => it.tag)} />
+              <IssueTagList issueId={issue.id} />
             </Suspense>
-          ) : (
-            <span className="text-gray-500">{t.noIssueTags}</span>
-          )}
+            <Suspense fallback={'Loading...'}>
+              <CategoryIssueTagEditor issueId={issue.id} categoryId={issue.categoryId} />
+            </Suspense>
+          </div>
         </div>
       </div>
     </Container>
