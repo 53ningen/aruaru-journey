@@ -1,8 +1,10 @@
+import { listIssuesByTag } from '@/actions/issue'
 import { getTag } from '@/actions/tag'
 import Breadcrumbs from '@/components/common/Breadcrumbs'
 import Container from '@/components/common/Container'
 import getMetadata from '@/components/common/Meta'
 import SectionHeading from '@/components/common/SectionHeading'
+import { IssueList } from '@/components/issue/IssueList'
 import { TagEditor } from '@/components/tag/TagEditor'
 import { TagForm } from '@/components/tag/TagForm'
 import { TagTree } from '@/components/tag/TagTree'
@@ -40,7 +42,8 @@ const TagPages = async ({ params }: Props) => {
   if (!tag) {
     notFound()
   }
-  const { tag: t } = await getDictionary()
+  const issues = await listIssuesByTag(tagId)
+  const { tag: t, issue: i } = await getDictionary()
   return (
     <Container className="max-w-screen-lg px-2 md:px-2 py-4">
       <Breadcrumbs items={[{ name: t.tagDetails }, { name: tag.name, href: `/tags/${tagId}` }]} />
@@ -54,6 +57,10 @@ const TagPages = async ({ params }: Props) => {
           <TagEditor>
             <TagForm tag={tag} />
           </TagEditor>
+        </div>
+        <div>
+          <SectionHeading title={t.relatedIssues} />
+          {issues.length === 0 ? <>{i.noIssue}</> : <IssueList issues={issues} />}
         </div>
       </div>
     </Container>

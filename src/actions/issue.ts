@@ -24,7 +24,32 @@ export const listIssues = unstable_cache(
       include: {
         category: true,
       },
+      orderBy: {
+        createdAt: 'desc',
+      },
+      take: 200,
     }),
   undefined,
   { tags: [CacheTags.Issue] }
+)
+
+export const listIssuesByTag = unstable_cache(
+  async (tagId: number) =>
+    prisma.issueTag
+      .findMany({
+        select: {
+          issue: {
+            include: {
+              category: true,
+            },
+          },
+        },
+        where: {
+          tagId,
+        },
+        take: 50,
+      })
+      .then((items) => items.map((item) => item.issue)),
+  undefined,
+  { tags: [CacheTags.IssueTag] }
 )

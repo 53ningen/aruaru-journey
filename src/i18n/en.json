@@ -16,13 +16,15 @@
     "url": "url",
     "tags": "Tags",
     "noCaseNote": "No case note found",
-    "noIssueTags": "No issue tag found"
+    "noIssueTags": "No issue tag found",
+    "noIssue": "No issue found"
   },
   "tag": {
     "create": "Create New Tag",
     "tagDetails": "Tag Details",
     "tagTree": "Tag Tree",
-    "addChild": "Add Child Tag"
+    "addChild": "Add Child Tag",
+    "relatedIssues": "Related Issues"
   },
   "category": {
     "create": "Create New Category"
