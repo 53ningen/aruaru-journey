@@ -1,8 +1,11 @@
 'use client'
 
 import { putIssueTag } from '@/actions/issueTag'
+import { useDictionary } from '@/i18n/hook'
 import { Tag } from '@prisma/client'
+import Link from 'next/link'
 import { ChangeEvent, Fragment, useState } from 'react'
+import { MdLibraryAdd } from 'react-icons/md'
 import Banner from '../common/Banner'
 import Button from '../common/Button'
 import Select from '../common/Select'
@@ -43,6 +46,7 @@ export const IssueTagEditor = ({ issueId, tags }: Props) => {
       setPending(false)
     }
   }
+  const { tag: t } = useDictionary()
   return (
     <div className="flex flex-col gap-2 text-xs">
       {Array.from({ length: selectedDepth + 1 }).map((_, i) => {
@@ -50,16 +54,28 @@ export const IssueTagEditor = ({ issueId, tags }: Props) => {
         return tagsForDepth.length === 0 ? (
           <Fragment key={i}></Fragment>
         ) : (
-          <Select size={i > selectedDepth - 3 ? tagsForDepth.length + 1 : 1} key={i} onChange={onSelected(i)} defaultValue={undefined}>
-            {<option value={undefined}></option>}
-            {tags
-              .filter((t) => t.parentId === selectedIds[i])
-              .map((tag) => (
-                <option key={tag.id} value={tag.id}>
-                  {tag.name}
-                </option>
-              ))}
-          </Select>
+          <Fragment key={i}>
+            <Select size={i > selectedDepth - 3 ? tagsForDepth.length + 1 : 1} onChange={onSelected(i)} defaultValue={undefined}>
+              {<option value={undefined}></option>}
+              {tags
+                .filter((t) => t.parentId === selectedIds[i])
+                .map((tag) => (
+                  <option key={tag.id} value={tag.id}>
+                    {tag.name}
+                  </option>
+                ))}
+            </Select>
+            {selectedIds[i] && (
+              <div className="flex gap-1 items-center justify-end pl-2 text-secondary">
+                <span>
+                  <MdLibraryAdd />
+                </span>
+                <Link href={`/tags/${selectedIds[i]}/createChild`} target="_blank" className="text-secondary">
+                  {t.addChild}
+                </Link>
+              </div>
+            )}
+          </Fragment>
         )
       })}
       {result.error && <Banner type="error" message={result.error} />}

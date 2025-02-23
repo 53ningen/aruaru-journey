@@ -21,7 +21,8 @@
   "tag": {
     "create": "Create New Tag",
     "tagDetails": "Tag Details",
-    "tagTree": "Tag Tree"
+    "tagTree": "Tag Tree",
+    "addChild": "Add Child Tag"
   },
   "category": {
     "create": "Create New Category"
