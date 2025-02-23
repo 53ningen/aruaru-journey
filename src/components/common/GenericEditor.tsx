@@ -2,6 +2,8 @@ import { ReactNode } from 'react'
 import Label from '../common/Label'
 import TextField from '../common/TextField'
 
+export type FormState = { message?: string; error?: string }
+
 interface Props<T> {
   item: T
   readOnlyFields?: (keyof T)[]
@@ -30,13 +32,17 @@ export function GenericEditor<T>({ item, readOnlyFields, requiredFields, customF
         }
         switch (t) {
           case 'number':
-            return (
-              <Label key={key}>
-                {key}
-                {required ? '*' : ''}
-                <TextField type="number" name={key} defaultValue={value} readOnly={readOnly} required={required} />
-              </Label>
-            )
+            if (key === 'id' && value == '0') {
+              return <TextField key={key} type="hidden" name={key} defaultValue={value} readOnly={readOnly} required={required} />
+            } else {
+              return (
+                <Label key={key}>
+                  {key}
+                  {required ? '*' : ''}
+                  <TextField type="number" name={key} defaultValue={value} readOnly={readOnly} required={required} />
+                </Label>
+              )
+            }
           default:
           case 'string':
             return (

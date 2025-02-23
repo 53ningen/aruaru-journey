@@ -3,6 +3,7 @@ import Breadcrumbs from '@/components/common/Breadcrumbs'
 import Container from '@/components/common/Container'
 import getMetadata from '@/components/common/Meta'
 import SectionHeading from '@/components/common/SectionHeading'
+import { TagEditor } from '@/components/tag/TagEditor'
 import { TagForm } from '@/components/tag/TagForm'
 import { TagTree } from '@/components/tag/TagTree'
 import { getDictionary } from '@/i18n/dictionaries'
@@ -29,7 +30,7 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
   return meta
 }
 
-const IssuePages = async ({ params }: Props) => {
+const TagPages = async ({ params }: Props) => {
   const { tagId: tagIdStr } = await params
   const tagId = parseInt(tagIdStr)
   if (isNaN(tagId)) {
@@ -50,11 +51,13 @@ const IssuePages = async ({ params }: Props) => {
         </div>
         <div>
           <SectionHeading title={t.tagDetails} />
-          <TagForm tag={tag} />
+          <TagEditor>
+            <TagForm tag={tag} />
+          </TagEditor>
         </div>
       </div>
     </Container>
   )
 }
 
-export default IssuePages
+export default TagPages

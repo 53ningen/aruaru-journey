@@ -3,7 +3,9 @@
     "title": "Aruaru Journey",
     "desc": "Aruaru-Journey is an app designed to organize and systematize responses to daily issues and questions, helping users manage and address recurring problems efficiently.",
     "solve": "Solve your issue",
-    "analyze": "Analyze issues"
+    "analyze": "Analyze issues",
+    "createTag": "Create new tag",
+    "createCategory": "Create new category"
   },
   "issue": {
     "categorizeIssues": "Categorize issues",
@@ -17,7 +19,11 @@
     "noIssueTags": "No issue tag found"
   },
   "tag": {
+    "create": "Create New Tag",
     "tagDetails": "Tag Details",
     "tagTree": "Tag Tree"
+  },
+  "category": {
+    "create": "Create New Category"
   }
 }

@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { Suspense } from 'react'
 
 export default async function Home() {
-  const { common: t, issue } = await getDictionary()
+  const { common: t, issue, tag } = await getDictionary()
   return (
     <Container className="max-w-screen-sm px-8 md:px-2">
       <div className="flex flex-col gap-8">
@@ -19,11 +19,11 @@ export default async function Home() {
         </div>
         <div>
           <Title title={t.analyze} />
-          <Suspense>
-            <div>
-              <Link href="/issues">{issue.categorizeIssues}</Link>
-            </div>
-          </Suspense>
+          <div className="flex flex-col">
+            <Link href="/issues">{issue.categorizeIssues}</Link>
+            <Link href="/tags/create">{t.createTag}</Link>
+            <Link href="/categories/create">{t.createCategory}</Link>
+          </div>
         </div>
       </div>
     </Container>

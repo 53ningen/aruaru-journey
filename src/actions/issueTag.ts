@@ -1,5 +1,6 @@
 'use server'
 
+import { FormState } from '@/components/common/GenericEditor'
 import { CacheTags } from '@/lib/cache'
 import prisma from '@/lib/prisma'
 import { revalidateTag, unstable_cache } from 'next/cache'
@@ -20,9 +21,7 @@ export const listIssueTags = unstable_cache(
   { tags: [CacheTags.IssueTag] }
 )
 
-type FormActionState = { message?: string; error?: string }
-
-export const putIssueTag = async (issueId: number, tagId: number): Promise<FormActionState> => {
+export const putIssueTag = async (issueId: number, tagId: number): Promise<FormState> => {
   try {
     await prisma.$transaction(async (tx) => {
       const exist = await tx.issueTag.findFirst({
@@ -52,7 +51,7 @@ export const putIssueTag = async (issueId: number, tagId: number): Promise<FormA
   }
 }
 
-export const deleteIssueTag = async (issueId: number, tagId: number): Promise<FormActionState> => {
+export const deleteIssueTag = async (issueId: number, tagId: number): Promise<FormState> => {
   try {
     await prisma.issueTag.deleteMany({
       where: {
