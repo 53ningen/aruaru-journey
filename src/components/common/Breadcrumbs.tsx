@@ -3,7 +3,7 @@ import { Fragment } from 'react'
 import Breadcrumb from './Breadcrumb'
 
 interface Props {
-  items: { name: string; href: string }[]
+  items: { name: string; href?: string }[]
 }
 
 const Breadcrumbs = ({ items }: Props) => {

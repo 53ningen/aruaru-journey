@@ -1,6 +1,7 @@
 import { listTags } from '@/actions/tag'
 import { Tag } from '@prisma/client'
 import Link from 'next/link'
+import { TagEditButton } from './TagEditButton'
 import { TagList } from './TagList'
 
 type Props = {
@@ -17,10 +18,11 @@ export const TagItem = async ({ tag, depth }: Props) => {
       return (
         <div className="pb-8">
           <div id={tag.id.toString()} className="mt-[-52px] pt-[52px] w-0 h-0 -z-50" />
-          <div className="pb-2 text-xl font-extrabold">
+          <div className="flex gap-1 items-baseline pb-2 text-xl font-extrabold">
             <Link href={`/categories/${tag.categoryId}#${tag.id}`} className="text-secondary">
               {tag.name}
             </Link>
+            <TagEditButton tagId={tag.id} />
           </div>
           <div className="flex flex-col gap-4 p-4 border rounded shadow-sm bg-white">
             {children.length > 0 && <TagList categoryId={tag.categoryId} parentTagId={tag.id} depth={depth + 1} />}
@@ -32,10 +34,11 @@ export const TagItem = async ({ tag, depth }: Props) => {
       return (
         <div className="flex flex-col pb-8">
           <div id={tag.id.toString()} className="mt-[-52px] pt-[52px] w-0 h-0 -z-50" />
-          <div className="pb-2 mb-4 text-xl font-extrabold border-b">
+          <div className="flex gap-1 items-baseline pb-2 mb-4 text-xl font-extrabold border-b">
             <Link href={`/categories/${tag.categoryId}#${tag.id}`} className="text-black">
               {tag.name}
             </Link>
+            <TagEditButton tagId={tag.id} />
           </div>
           {children.length > 0 && (
             <div>
@@ -48,10 +51,11 @@ export const TagItem = async ({ tag, depth }: Props) => {
       return (
         <div className="flex flex-col">
           <div id={tag.id.toString()} className="mt-[-52px] pt-[52px] w-0 h-0 -z-50" />
-          <div className="text-lg font-bold">
+          <div className="flex gap-1 items-baseline text-lg font-bold">
             <Link href={`/categories/${tag.categoryId}#${tag.id}`} className="text-black">
               {tag.name}
             </Link>
+            <TagEditButton tagId={tag.id} />
           </div>
           {children.length > 0 && (
             <div className="pl-4 pb-4">
@@ -64,7 +68,10 @@ export const TagItem = async ({ tag, depth }: Props) => {
       return (
         <div className="flex flex-col gap-1">
           <div id={tag.id.toString()} className="mt-[-52px] pt-[52px] w-0 h-0 -z-50" />
-          <div className="text-sm text-gray-500">{tag.name}</div>
+          <div className="flex gap-1 items-baseline text-sm text-gray-500">
+            <span>{tag.name}</span>
+            <TagEditButton tagId={tag.id} />
+          </div>
           {children.length > 0 && (
             <div className="pl-4 pb-4">
               <TagList categoryId={tag.categoryId} parentTagId={tag.id} depth={depth + 1} />

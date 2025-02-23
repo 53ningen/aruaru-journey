@@ -15,5 +15,9 @@
     "tags": "Tags",
     "noCaseNote": "No case note found",
     "noIssueTags": "No issue tag found"
+  },
+  "tag": {
+    "tagDetails": "Tag Details",
+    "tagTree": "Tag Tree"
   }
 }
