@@ -3,8 +3,8 @@ import Breadcrumbs from '@/components/common/Breadcrumbs'
 import Container from '@/components/common/Container'
 import getMetadata from '@/components/common/Meta'
 import SectionHeading from '@/components/common/SectionHeading'
-import { TagAncestorTree } from '@/components/tag/TagAncestorTree'
 import { TagForm } from '@/components/tag/TagForm'
+import { TagTree } from '@/components/tag/TagTree'
 import { getDictionary } from '@/i18n/dictionaries'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
@@ -46,7 +46,7 @@ const IssuePages = async ({ params }: Props) => {
       <div className="flex flex-col gap-8">
         <div>
           <SectionHeading title={t.tagTree} />
-          <TagAncestorTree tag={tag} />
+          <TagTree tag={tag} />
         </div>
         <div>
           <SectionHeading title={t.tagDetails} />
