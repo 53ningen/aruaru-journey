@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { Suspense } from 'react'
 
 export default async function Home() {
-  const { common: t, issue, tag } = await getDictionary()
+  const { common: t, issue } = await getDictionary()
   return (
     <Container className="max-w-screen-sm px-8 md:px-2">
       <div className="flex flex-col gap-8">
