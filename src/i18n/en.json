@@ -27,6 +27,8 @@
     "relatedIssues": "Related Issues"
   },
   "category": {
-    "create": "Create New Category"
+    "create": "Create New Category",
+    "solve": "Solve your issue",
+    "wiki": "XWiki format source"
   }
 }
