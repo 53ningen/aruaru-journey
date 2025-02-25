@@ -1,5 +1,6 @@
 'use server'
 
+import { FormState } from '@/components/common/GenericEditor'
 import { CacheTags } from '@/lib/cache'
 import prisma from '@/lib/prisma'
 import { unstable_cache } from 'next/cache'
@@ -59,3 +60,29 @@ export const listIssuesByTag = unstable_cache(
   undefined,
   { tags: [CacheTags.IssueTag] }
 )
+
+export const insertBlukIssues = async (_: FormState, formData: FormData): Promise<FormState> => {
+  const csv = formData.get('csv') as string
+  const issues = csv
+    .split('\n')
+    .filter((line) => line)
+    .map((line) => line.split('\t'))
+    .map(([, title, url, categoryId, createdAt]) => ({
+      title,
+      url,
+      categoryId: parseInt(categoryId),
+      createdAt: new Date(createdAt.replace('T', ' ').replace('Z', '').slice(0, 19)),
+    }))
+  try {
+    await prisma.issue.createMany({
+      data: issues,
+    })
+    return { message: 'Create Successful' }
+  } catch (e) {
+    if (e instanceof Error) {
+      return { error: e.message }
+    } else {
+      return { error: 'Unknown Error' }
+    }
+  }
+}

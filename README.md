@@ -6,5 +6,7 @@ Aruaru-Journey is an app designed to organize and systematize responses to daily
 
 ```
 yarn install
+touch ./prisma/data.db
+yarn prisma push db
 yarn build
 ```

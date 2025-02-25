@@ -21,6 +21,7 @@ export default async function Home() {
           <Title title={t.analyze} />
           <div className="flex flex-col">
             <Link href="/issues">{issue.categorizeIssues}</Link>
+            <Link href="/issues/create">{t.createIssues}</Link>
             <Link href="/tags/create">{t.createTag}</Link>
             <Link href="/categories/create">{t.createCategory}</Link>
           </div>

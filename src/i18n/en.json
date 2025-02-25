@@ -5,7 +5,8 @@
     "solve": "Solve your issue",
     "analyze": "Analyze issues",
     "createTag": "Create new tag",
-    "createCategory": "Create new category"
+    "createCategory": "Create new category",
+    "createIssues": "Create new issues"
   },
   "issue": {
     "categorizeIssues": "Categorize issues",
