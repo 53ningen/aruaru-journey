@@ -19,13 +19,19 @@ export const getIssue = unstable_cache(
 )
 
 export const listIssues = unstable_cache(
-  async () =>
+  async (categoryId?: number) =>
     prisma.issue.findMany({
       include: {
         category: true,
       },
       orderBy: {
         createdAt: 'desc',
+      },
+      where: {
+        categoryId,
+        status: {
+          not: 'RESOLVED',
+        },
       },
       take: 200,
     }),

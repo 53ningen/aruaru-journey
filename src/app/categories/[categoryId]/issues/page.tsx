@@ -1,15 +1,12 @@
 import { getCategory } from '@/actions/category'
-import { CategoryXWikiNotes } from '@/components/category/CategoryXWikiNotes'
+import { listIssues } from '@/actions/issue'
 import Breadcrumbs from '@/components/common/Breadcrumbs'
 import Container from '@/components/common/Container'
 import getMetadata from '@/components/common/Meta'
-import SectionHeading from '@/components/common/SectionHeading'
-import { TagList } from '@/components/tag/TagList'
+import { IssueList } from '@/components/issue/IssueList'
 import { getDictionary } from '@/i18n/dictionaries'
 import { Metadata } from 'next'
-import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { Suspense } from 'react'
 
 interface Props {
   params: Promise<{ categoryId: string }>
@@ -25,7 +22,7 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
   if (!category) {
     notFound()
   }
-  const title = category.name
+  const title = `issues: ${category.name}`
   const meta = await getMetadata(title)
   return meta
 }
@@ -41,35 +38,12 @@ const IssuePages = async ({ params }: Props) => {
     notFound()
   }
   const { category: t } = await getDictionary()
+  const issues = await listIssues(categoryId)
   return (
     <Container className="max-w-screen-lg px-2 md:px-2 py-4">
-      <Breadcrumbs items={[{ name: category?.name, href: `/categories/${categoryId}` }]} />{' '}
+      <Breadcrumbs items={[{ name: category.name }, { name: t.issues, href: `/categories/${categoryId}/issues` }]} />
       <div className="flex flex-col gap-8 py-8">
-        <div>
-          <ul className="list-disc list-inside">
-            <li>
-              <Link href={`/categories/${categoryId}/issues`}>{t.issues}</Link>
-            </li>
-            <li>
-              <Link href={`/categories/${categoryId}#tags`}>{t.solve}</Link>
-            </li>
-            <li>
-              <Link href={`/categories/${categoryId}#wiki`}>{t.wiki}</Link>
-            </li>
-          </ul>
-        </div>
-        <Suspense fallback={<div>Loading...</div>}>
-          <div id="tags">
-            <SectionHeading title={t.solve} />
-            <TagList categoryId={categoryId} parentTagId={undefined} depth={0} />
-          </div>
-        </Suspense>
-        <Suspense fallback={<div>Loading...</div>}>
-          <div id="wiki">
-            <SectionHeading title={t.wiki} />
-            <CategoryXWikiNotes categoryId={categoryId} />
-          </div>
-        </Suspense>
+        <IssueList issues={issues} />
       </div>
     </Container>
   )

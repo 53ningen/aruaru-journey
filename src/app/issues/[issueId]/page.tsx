@@ -53,6 +53,10 @@ const IssuePages = async ({ params }: Props) => {
             <div>{issue.category.name}</div>
           </div>
           <div className="flex gap-2">
+            <div>{t.status}:</div>
+            <div>{issue.status}</div>
+          </div>
+          <div className="flex gap-2">
             <div>{t.createdAt}:</div>
             <div>{new Date(issue.createdAt).toISOString()}</div>
           </div>

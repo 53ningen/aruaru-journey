@@ -7,14 +7,21 @@ datasource db {
   url      = "file:./data.db"
 }
 
+enum IssueStatus {
+  OPEN
+  PENDING
+  RESOLVED
+}
+
 model Issue {
-  id         Int        @id @default(autoincrement())
+  id         Int         @id @default(autoincrement())
   title      String
   url        String
   note       String?
   categoryId Int
-  createdAt  DateTime   @default(now())
-  category   Category   @relation(fields: [categoryId], references: [id])
+  status     IssueStatus @default(OPEN)
+  createdAt  DateTime    @default(now())
+  category   Category    @relation(fields: [categoryId], references: [id])
   issueTags  IssueTag[]
 }
 

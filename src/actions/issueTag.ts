@@ -39,8 +39,17 @@ export const putIssueTag = async (issueId: number, tagId: number): Promise<FormS
           tagId,
         },
       })
+      await tx.issue.update({
+        where: {
+          id: issueId,
+        },
+        data: {
+          status: 'RESOLVED',
+        },
+      })
     })
     revalidateTag(CacheTags.IssueTag)
+    revalidateTag(CacheTags.Issue)
     return { message: 'Success' }
   } catch (e) {
     if (e instanceof Error) {

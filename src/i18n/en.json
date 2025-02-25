@@ -12,6 +12,7 @@
     "id": "id",
     "category": "category",
     "title": "title",
+    "status": "status",
     "createdAt": "created",
     "url": "url",
     "tags": "Tags",
@@ -27,6 +28,7 @@
     "relatedIssues": "Related Issues"
   },
   "category": {
+    "issues": "List of issues in this category",
     "create": "Create New Category",
     "solve": "Solve your issue",
     "wiki": "XWiki format source"
