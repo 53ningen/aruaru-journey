@@ -5,5 +5,6 @@ Aruaru-Journey is an app designed to organize and systematize responses to daily
 ## Build
 
 ```
+yarn install
 yarn build
 ```
