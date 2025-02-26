@@ -67,7 +67,7 @@ export const insertBlukIssues = async (_: FormState, formData: FormData): Promis
     .split('\n')
     .filter((line) => line)
     .map((line) => line.split('\t'))
-    .map(([, title, url, categoryId, createdAt]) => ({
+    .map(([title, url, categoryId, createdAt]) => ({
       title,
       url,
       categoryId: parseInt(categoryId),

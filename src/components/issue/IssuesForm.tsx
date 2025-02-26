@@ -12,7 +12,7 @@ const IssuesForm = () => {
   return (
     <form action={dispatch} className="flex flex-col gap-2">
       <Label>
-        CSV format issues (id,title,url,categoryId,createdAt)
+        CSV format issues (title\turl\tcategoryId\tcreatedAt)
         <TextArea name="csv" rows={12} disabled={pending} defaultValue="" />
       </Label>
       {state.error && <Banner type="error" message={state.error} />}
