@@ -20,6 +20,12 @@ This is a paragraph with **bold text**, _italic text_, and **_bold italic text_*
 ### Blockquote
 
 > This is a blockquote.
+> Hello, **World!**
+>
+> - Hoge
+>   - Fuga
+>
+> [test](http://example.com)
 
 ### Code
 

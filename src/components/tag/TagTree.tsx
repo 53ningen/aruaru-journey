@@ -25,7 +25,7 @@ export const TagTree = async ({ tag }: Props) => {
               <VscBlank key={i} className="w-2" />
             ))}
             <span>{currentItem ? <FaFolderOpen className="text-amber-500" /> : <FaFolderClosed className="text-amber-300" />}</span>
-            <Link href={`/categories/${item.categoryId}#${item.id}`} className={`${currentItem && 'text-secondary font-bold'}`}>
+            <Link href={`/tags/${item.id}`} className={`${currentItem && 'text-secondary font-bold'}`}>
               {item.name}
             </Link>
           </div>
@@ -40,7 +40,7 @@ export const TagTree = async ({ tag }: Props) => {
             <span>
               <FaFile className="text-gray-500" />
             </span>
-            <Link href={`/categories/${item.categoryId}#${item.id}`}>{item.name}</Link>
+            <Link href={`/tags/${item.id}`}>{item.name}</Link>
           </div>
         )
       })}
