@@ -60,7 +60,7 @@ const TagPages = async ({ params }: Props) => {
             <TagForm tag={tag} />
           </TagEditor>
         </div>
-        <div>
+        <div className="flex flex-col">
           <SectionHeading title={t.relatedIssues} />
           {issues.length === 0 ? <>{i.noIssue}</> : <IssueList issues={issues} />}
         </div>
