@@ -2,7 +2,7 @@ import { listChildTags, listParentTags } from '@/actions/tag'
 import { getDictionary } from '@/i18n/dictionaries'
 import { Tag } from '@prisma/client'
 import Link from 'next/link'
-import { FaFile, FaFolderOpen } from 'react-icons/fa'
+import { FaFile, FaFolderOpen, FaRegArrowAltCircleRight } from 'react-icons/fa'
 import { FaFolderClosed } from 'react-icons/fa6'
 import { MdLibraryAdd } from 'react-icons/md'
 import { VscBlank } from 'react-icons/vsc'
@@ -28,6 +28,9 @@ export const TagTree = async ({ tag }: Props) => {
             <Link href={`/tags/${item.id}`} className={`${currentItem && 'text-secondary font-bold'}`}>
               {item.name}
             </Link>
+            <Link href={`/categories/${tag.categoryId}#${item.id}`}>
+              <FaRegArrowAltCircleRight />
+            </Link>
           </div>
         )
       })}
@@ -41,6 +44,9 @@ export const TagTree = async ({ tag }: Props) => {
               <FaFile className="text-gray-500" />
             </span>
             <Link href={`/tags/${item.id}`}>{item.name}</Link>
+            <Link href={`/categories/${tag.categoryId}#${item.id}`}>
+              <FaRegArrowAltCircleRight />
+            </Link>
           </div>
         )
       })}

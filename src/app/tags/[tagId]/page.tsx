@@ -1,3 +1,4 @@
+import { getCategory } from '@/actions/category'
 import { listIssuesByTag } from '@/actions/issue'
 import { getTag } from '@/actions/tag'
 import Breadcrumbs from '@/components/common/Breadcrumbs'
@@ -42,11 +43,12 @@ const TagPages = async ({ params }: Props) => {
   if (!tag) {
     notFound()
   }
+  const category = await getCategory(tag.categoryId)
   const issues = await listIssuesByTag(tagId)
   const { tag: t, issue: i } = await getDictionary()
   return (
     <Container className="max-w-screen-lg px-2 md:px-2 py-4">
-      <Breadcrumbs items={[{ name: t.tagDetails }, { name: tag.name, href: `/tags/${tagId}` }]} />
+      <Breadcrumbs items={[{ name: category!.name, href: `/categories/${tag.categoryId}` }, { name: tag.name }]} />
       <div className="flex flex-col gap-8">
         <div>
           <SectionHeading title={t.tagTree} />

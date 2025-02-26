@@ -43,7 +43,7 @@ const IssuePages = async ({ params }: Props) => {
   const { category: t } = await getDictionary()
   return (
     <Container className="max-w-screen-lg px-2 md:px-2 py-4">
-      <Breadcrumbs items={[{ name: category?.name, href: `/categories/${categoryId}` }]} />{' '}
+      <Breadcrumbs items={[{ name: category.name }]} />
       <div className="flex flex-col gap-8 py-8">
         <div>
           <ul className="list-disc list-inside">

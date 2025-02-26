@@ -6,7 +6,7 @@ interface Props {
 
 const Breadcrumb = ({ item }: Props) =>
   item.href ? (
-    <Link href={item.href} className="inline text-primary text-sm font-semibold">
+    <Link href={item.href} className="inline text-sm font-semibold">
       {item.name}
     </Link>
   ) : (

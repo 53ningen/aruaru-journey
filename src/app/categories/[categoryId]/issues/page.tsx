@@ -41,12 +41,7 @@ const IssuePages = async ({ params }: Props) => {
   const issues = await listIssues(categoryId)
   return (
     <Container className="max-w-screen-lg px-2 md:px-2 py-4">
-      <Breadcrumbs
-        items={[
-          { name: category.name, href: `/categories/${categoryId}/` },
-          { name: t.issues, href: `/categories/${categoryId}/issues` },
-        ]}
-      />
+      <Breadcrumbs items={[{ name: category.name, href: `/categories/${categoryId}/` }, { name: t.issues }]} />
       <div className="flex flex-col gap-8 py-8">
         <IssueList issues={issues} />
       </div>
