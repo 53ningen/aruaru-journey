@@ -13,18 +13,22 @@ type Props = {
 export const IssueTagItem = async ({ issueId, tag }: Props) => {
   const tree = await listParents(tag)
   return (
-    <div className="flex gap-1 text-sm">
+    <div className="flex flex-wrap gap-1 text-sm">
       {tree.map((item, index) => {
         return index === 0 ? (
           <Fragment key={item.id}>
-            <Link href={`/categories/${item.categoryId}#${item.id}`}>{item.name}</Link>
+            <Link href={`/categories/${item.categoryId}#${item.id}`} className="whitespace-nowrap">
+              {item.name}
+            </Link>
           </Fragment>
         ) : (
           <Fragment key={item.id}>
             <span>
               <ChevronRightIcon className="inline h-5 w-5 text-gray-500" />
             </span>
-            <Link href={`/categories/${item.categoryId}#${item.id}`}>{item.name}</Link>
+            <Link href={`/categories/${item.categoryId}#${item.id}`} className="whitespace-nowrap">
+              {item.name}
+            </Link>
           </Fragment>
         )
       })}
