@@ -37,7 +37,13 @@ function mdast2xwiki(this: Processor) {
         return text.value
       case 'blockquote':
         const blockquote = node as Blockquote
-        return '> ' + blockquote.children.map((child) => compile(child, file)).join('')
+        const plain = blockquote.children.map((child) => compile(child, file)).join('\n')
+        const lines = plain.split('\n')
+        const quoted = lines
+          .slice(0, lines.length - 1)
+          .map((line) => '> ' + line)
+          .join('\n')
+        return quoted + '\n' + lines[lines.length - 1]
       case 'code':
         const code = node as Code
         return '{{code}}\n' + code.value + '\n{{/code}}\n'
@@ -53,6 +59,8 @@ function mdast2xwiki(this: Processor) {
         return ''
       case 'thematicBreak':
         return '----\n'
+      case 'break':
+        return '\n'
       default:
         return '<nowiki>' + node.type + '</nowiki>'
     }

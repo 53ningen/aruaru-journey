@@ -58,12 +58,10 @@ const IssuePages = async ({ params }: Props) => {
             </li>
           </ul>
         </div>
-        <Suspense fallback={<div>Loading...</div>}>
-          <div id="tags">
-            <SectionHeading title={t.solve} />
-            <TagList categoryId={categoryId} parentTagId={undefined} depth={0} />
-          </div>
-        </Suspense>
+        <div id="tags">
+          <SectionHeading title={t.solve} />
+          <TagList categoryId={categoryId} parentTagId={undefined} depth={0} />
+        </div>
         <Suspense fallback={<div>Loading...</div>}>
           <div id="wiki">
             <SectionHeading title={t.wiki} />
